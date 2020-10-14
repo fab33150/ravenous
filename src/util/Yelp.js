@@ -1,4 +1,4 @@
-const apiKey = 'JVMT49liTYvVKjOYkvx2F0Dtzl8ucmTjwf-XMrAoNAcBNI-O1ZrjTlWtg1tx7u4128Nlw5g0_3pMVQuSbEfZ-sAH9aCxol_iOMuHBPwxsdGFWHc--2L4Q8YQb5N0X3Y';
+const apiKey = 'JVMT49liTYvVKjOYkvx2F0Dtzl8ucmTjwf-XMrAoNAcBNI-O1ZrjTlWtg1tx7u4128Nlw5g0_3pMVQuSbEfZ-sAH9aCxol_iOMuHBPwxsdGFWHc--2L4Q8YQb5N0X3Yx';
 
 const Yelp = {
     searchYelp(term, location, sortBy) {
@@ -6,16 +6,18 @@ const Yelp = {
             headers: {
                 Authorization: `Bearer ${apiKey}`,
             },
-        }).then(response => {
-            return response.json();
-        }).then(jsonResponse => {
+        }).then((response) => {
+            console.log(response)
+        return response.json();
+        }).then((jsonResponse) => {
             if (jsonResponse.businesses) {
-               return jsonResponse.businesses.map(business => {
+               return jsonResponse.businesses.map((business) => {
+                   console.log(business);
                       return { 
                         id: business.id,
                         imageSrc: business.image_url,
                         name: business.name,
-                        address: business.location.address,
+                        address: business.location.address1,
                         city: business.location.city,
                         state: business.location.state,
                         zipCode: business.location.zipCode,
@@ -25,9 +27,10 @@ const Yelp = {
                     };
                 });
             }
-        });
+        })
   
     }
-}
+};
+
 
 export default Yelp;
